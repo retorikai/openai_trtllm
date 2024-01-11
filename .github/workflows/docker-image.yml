@@ -14,5 +14,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: submodules-init
+      uses: snickerbockers/submodules-init@v4
+            
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag openai_trtllm:$(date +%s) --tag openai_trtllm:latest
