@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - run: echo "username ${{ env.DOCKERHUB_USERNAME }} ${{ secrets.DOCKERHUB_TOKEN }}."
+    - run: echo "username ${{ vars.DOCKERHUB_USERNAME }} ${{ secrets.DOCKERHUB_TOKEN }}."
     
     - name: submodules-init
       uses: snickerbockers/submodules-init@v4
@@ -27,7 +27,7 @@ jobs:
     - name: Log in to the Container registry
       uses: docker/login-action@v3.0.0
       with:
-          username: ${{ env.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
             
     - name: Build the Docker image
