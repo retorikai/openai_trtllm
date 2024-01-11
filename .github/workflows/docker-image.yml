@@ -12,11 +12,25 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}
+  
     steps:
     - uses: actions/checkout@v3
     
     - name: submodules-init
       uses: snickerbockers/submodules-init@v4
+
+    - name: Log in to the Container registry
+      uses: docker/login-action@v3.0.0
+      with:
+          username: ${{ env.DOCKERHUB_USERNAME}}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
             
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag openai_trtllm:$(date +%s) --tag openai_trtllm:latest
+      run: docker build . --file Dockerfile --tag openai_trtllm:0.1.0 --tag openai_trtllm:latest
+
+    - name: Build the Docker image
+      run: docker push --tag openai_trtllm:0.1.0 --tag openai_trtllm:latest
+    
