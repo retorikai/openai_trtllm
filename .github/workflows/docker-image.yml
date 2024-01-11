@@ -31,8 +31,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
             
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag openai_trtllm:0.1.0 --tag openai_trtllm:latest
+      run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}:0.1.0 --tag ${{ env.IMAGE_NAME }}:latest
 
-    - name: Build the Docker image
-      run: docker push --tag openai_trtllm:0.1.0 --tag openai_trtllm:latest
+    - name: Push the Docker image
+      run: docker push --all-tags ${{ env.IMAGE_NAME }}
     
